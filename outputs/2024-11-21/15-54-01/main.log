@@ -1,0 +1,703 @@
+[2024-11-21 15:54:13,983][flwr][INFO] - Starting Flower simulation, config: ServerConfig(num_rounds=10, round_timeout=None)
+[2024-11-21 15:54:23,944][flwr][INFO] - Flower VCE: Ray initialized with resources: {'GPU': 1.0, 'node:127.0.0.1': 1.0, 'memory': 1518430619.0, 'object_store_memory': 759215308.0, 'CPU': 8.0, 'node:__internal_head__': 1.0}
+[2024-11-21 15:54:23,944][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.dev/docs/framework/how-to-run-simulations.html
+[2024-11-21 15:54:23,944][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 2, 'num_gpus': 0.0}
+[2024-11-21 15:54:23,976][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 4 actors
+[2024-11-21 15:54:23,976][flwr][INFO] - Initializing global parameters
+[2024-11-21 15:54:23,976][flwr][INFO] - Requesting initial parameters from one random client
+[2024-11-21 15:54:31,062][flwr][INFO] - Received initial parameters from one random client
+[2024-11-21 15:54:31,062][flwr][INFO] - Evaluating initial parameters
+[2024-11-21 15:54:34,123][flwr][INFO] - initial parameters (loss, other metrics): 182.17216324806213, {'accuracy': 0.071}
+[2024-11-21 15:54:34,123][flwr][INFO] - FL starting
+[2024-11-21 15:54:34,123][flwr][DEBUG] - fit_round 1: strategy sampled 10 clients (out of 100)
+[2024-11-21 15:54:54,192][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\auto_init_hook.py", line 24, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\worker.py", line 2524, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 72, in run
+    job_results = job_fn(client)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\client.py", line 68, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\model.py", line 39, in train
+    for images, labels in trainloader:
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 28724, 24972) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+  File "python\ray\_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1498, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 56 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1132, in _try_get_data\n    data = self._data_queue.get(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\multiprocessing\\queues.py", line 114, in get\n    raise Empty\n_queue.Empty\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n                  ^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n           ^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n           ^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\client.py", line 68, in fit\n    train(self.model, self.trainloader, optim, epochs, self.device)\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\model.py", line 39, in train\n    for images, labels in trainloader:\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 630, in __next__\n    data = self._next_data()\n           ^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1328, in _next_data\n    idx, data = self._get_data()\n                ^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1294, in _get_data\n    success, data = self._try_get_data()\n                    ^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1145, in _try_get_data\n    raise RuntimeError(f\'DataLoader worker (pid(s) {pids_str}) exited unexpectedly\') from e\nRuntimeError: DataLoader worker (pid(s) 28724, 24972) exited unexpectedly\n',)
+
+[2024-11-21 15:54:54,274][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 72, in run
+    job_results = job_fn(client)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\client.py", line 68, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\model.py", line 39, in train
+    for images, labels in trainloader:
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 28724, 24972) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+  File "python\ray\_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1498, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 56 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1132, in _try_get_data\n    data = self._data_queue.get(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\multiprocessing\\queues.py", line 114, in get\n    raise Empty\n_queue.Empty\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n                  ^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n           ^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n           ^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\client.py", line 68, in fit\n    train(self.model, self.trainloader, optim, epochs, self.device)\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\model.py", line 39, in train\n    for images, labels in trainloader:\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 630, in __next__\n    data = self._next_data()\n           ^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1328, in _next_data\n    idx, data = self._get_data()\n                ^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1294, in _get_data\n    success, data = self._try_get_data()\n                    ^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1145, in _try_get_data\n    raise RuntimeError(f\'DataLoader worker (pid(s) {pids_str}) exited unexpectedly\') from e\nRuntimeError: DataLoader worker (pid(s) 28724, 24972) exited unexpectedly\n',)
+[2024-11-21 15:54:54,382][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\auto_init_hook.py", line 24, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\worker.py", line 2524, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 72, in run
+    job_results = job_fn(client)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\client.py", line 68, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\model.py", line 39, in train
+    for images, labels in trainloader:
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 26912, 13284) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+  File "python\ray\_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1498, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 68 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1132, in _try_get_data\n    data = self._data_queue.get(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\multiprocessing\\queues.py", line 114, in get\n    raise Empty\n_queue.Empty\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n                  ^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n           ^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n           ^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\client.py", line 68, in fit\n    train(self.model, self.trainloader, optim, epochs, self.device)\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\model.py", line 39, in train\n    for images, labels in trainloader:\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 630, in __next__\n    data = self._next_data()\n           ^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1328, in _next_data\n    idx, data = self._get_data()\n                ^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1294, in _get_data\n    success, data = self._try_get_data()\n                    ^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1145, in _try_get_data\n    raise RuntimeError(f\'DataLoader worker (pid(s) {pids_str}) exited unexpectedly\') from e\nRuntimeError: DataLoader worker (pid(s) 26912, 13284) exited unexpectedly\n',)
+
+[2024-11-21 15:54:54,390][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 72, in run
+    job_results = job_fn(client)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\client.py", line 68, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\model.py", line 39, in train
+    for images, labels in trainloader:
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 26912, 13284) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+  File "python\ray\_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1498, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 68 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1132, in _try_get_data\n    data = self._data_queue.get(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\multiprocessing\\queues.py", line 114, in get\n    raise Empty\n_queue.Empty\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n                  ^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n           ^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n           ^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\client.py", line 68, in fit\n    train(self.model, self.trainloader, optim, epochs, self.device)\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\model.py", line 39, in train\n    for images, labels in trainloader:\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 630, in __next__\n    data = self._next_data()\n           ^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1328, in _next_data\n    idx, data = self._get_data()\n                ^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1294, in _get_data\n    success, data = self._try_get_data()\n                    ^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1145, in _try_get_data\n    raise RuntimeError(f\'DataLoader worker (pid(s) {pids_str}) exited unexpectedly\') from e\nRuntimeError: DataLoader worker (pid(s) 26912, 13284) exited unexpectedly\n',)
+[2024-11-21 15:54:56,608][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\auto_init_hook.py", line 24, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\worker.py", line 2524, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=25836, ip=127.0.0.1, actor_id=b938924e205e2af50af39fbc01000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000017DFD079DD0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=25836, ip=127.0.0.1, actor_id=b938924e205e2af50af39fbc01000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000017DFD079DD0>)
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 72, in run
+    job_results = job_fn(client)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\client.py", line 68, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\model.py", line 39, in train
+    for images, labels in trainloader:
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 10936, 10136) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=25836, ip=127.0.0.1, actor_id=b938924e205e2af50af39fbc01000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000017DFD079DD0>)
+  File "python\ray\_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1498, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 44 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1132, in _try_get_data\n    data = self._data_queue.get(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\multiprocessing\\queues.py", line 114, in get\n    raise Empty\n_queue.Empty\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n                  ^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n           ^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n           ^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\client.py", line 68, in fit\n    train(self.model, self.trainloader, optim, epochs, self.device)\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\model.py", line 39, in train\n    for images, labels in trainloader:\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 630, in __next__\n    data = self._next_data()\n           ^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1328, in _next_data\n    idx, data = self._get_data()\n                ^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1294, in _get_data\n    success, data = self._try_get_data()\n                    ^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1145, in _try_get_data\n    raise RuntimeError(f\'DataLoader worker (pid(s) {pids_str}) exited unexpectedly\') from e\nRuntimeError: DataLoader worker (pid(s) 10936, 10136) exited unexpectedly\n',)
+
+[2024-11-21 15:54:56,619][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=25836, ip=127.0.0.1, actor_id=b938924e205e2af50af39fbc01000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000017DFD079DD0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=25836, ip=127.0.0.1, actor_id=b938924e205e2af50af39fbc01000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000017DFD079DD0>)
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 72, in run
+    job_results = job_fn(client)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\client.py", line 68, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\model.py", line 39, in train
+    for images, labels in trainloader:
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 10936, 10136) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=25836, ip=127.0.0.1, actor_id=b938924e205e2af50af39fbc01000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000017DFD079DD0>)
+  File "python\ray\_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1498, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 44 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1132, in _try_get_data\n    data = self._data_queue.get(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\multiprocessing\\queues.py", line 114, in get\n    raise Empty\n_queue.Empty\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n                  ^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n           ^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n           ^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\client.py", line 68, in fit\n    train(self.model, self.trainloader, optim, epochs, self.device)\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\model.py", line 39, in train\n    for images, labels in trainloader:\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 630, in __next__\n    data = self._next_data()\n           ^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1328, in _next_data\n    idx, data = self._get_data()\n                ^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1294, in _get_data\n    success, data = self._try_get_data()\n                    ^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1145, in _try_get_data\n    raise RuntimeError(f\'DataLoader worker (pid(s) {pids_str}) exited unexpectedly\') from e\nRuntimeError: DataLoader worker (pid(s) 10936, 10136) exited unexpectedly\n',)
+[2024-11-21 15:55:04,911][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\auto_init_hook.py", line 24, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\worker.py", line 2524, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 72, in run
+    job_results = job_fn(client)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\client.py", line 68, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\model.py", line 39, in train
+    for images, labels in trainloader:
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 16812, 6896) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+  File "python\ray\_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1498, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 89 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1132, in _try_get_data\n    data = self._data_queue.get(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\multiprocessing\\queues.py", line 114, in get\n    raise Empty\n_queue.Empty\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n                  ^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n           ^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n           ^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\client.py", line 68, in fit\n    train(self.model, self.trainloader, optim, epochs, self.device)\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\model.py", line 39, in train\n    for images, labels in trainloader:\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 630, in __next__\n    data = self._next_data()\n           ^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1328, in _next_data\n    idx, data = self._get_data()\n                ^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1294, in _get_data\n    success, data = self._try_get_data()\n                    ^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1145, in _try_get_data\n    raise RuntimeError(f\'DataLoader worker (pid(s) {pids_str}) exited unexpectedly\') from e\nRuntimeError: DataLoader worker (pid(s) 16812, 6896) exited unexpectedly\n',)
+
+[2024-11-21 15:55:04,918][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 72, in run
+    job_results = job_fn(client)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\client.py", line 68, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\model.py", line 39, in train
+    for images, labels in trainloader:
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 16812, 6896) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=24572, ip=127.0.0.1, actor_id=00e3c973f3b3b870b3bc532801000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x000002D47F3BABD0>)
+  File "python\ray\_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1498, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 89 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1132, in _try_get_data\n    data = self._data_queue.get(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\multiprocessing\\queues.py", line 114, in get\n    raise Empty\n_queue.Empty\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n                  ^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n           ^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n           ^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\client.py", line 68, in fit\n    train(self.model, self.trainloader, optim, epochs, self.device)\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\model.py", line 39, in train\n    for images, labels in trainloader:\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 630, in __next__\n    data = self._next_data()\n           ^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1328, in _next_data\n    idx, data = self._get_data()\n                ^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1294, in _get_data\n    success, data = self._try_get_data()\n                    ^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1145, in _try_get_data\n    raise RuntimeError(f\'DataLoader worker (pid(s) {pids_str}) exited unexpectedly\') from e\nRuntimeError: DataLoader worker (pid(s) 16812, 6896) exited unexpectedly\n',)
+[2024-11-21 15:55:05,213][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\auto_init_hook.py", line 24, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\worker.py", line 2524, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 72, in run
+    job_results = job_fn(client)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\client.py", line 68, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\model.py", line 39, in train
+    for images, labels in trainloader:
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 28288, 23520) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+  File "python\ray\_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1498, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 16 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1132, in _try_get_data\n    data = self._data_queue.get(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\multiprocessing\\queues.py", line 114, in get\n    raise Empty\n_queue.Empty\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n                  ^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n           ^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n           ^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\client.py", line 68, in fit\n    train(self.model, self.trainloader, optim, epochs, self.device)\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\model.py", line 39, in train\n    for images, labels in trainloader:\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 630, in __next__\n    data = self._next_data()\n           ^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1328, in _next_data\n    idx, data = self._get_data()\n                ^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1294, in _get_data\n    success, data = self._try_get_data()\n                    ^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1145, in _try_get_data\n    raise RuntimeError(f\'DataLoader worker (pid(s) {pids_str}) exited unexpectedly\') from e\nRuntimeError: DataLoader worker (pid(s) 28288, 23520) exited unexpectedly\n',)
+
+[2024-11-21 15:55:05,224][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 72, in run
+    job_results = job_fn(client)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\client.py", line 68, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "C:\Users\marco\Documents\Workplace\FL\Flower_Pytorch\Parte_1\model.py", line 39, in train
+    for images, labels in trainloader:
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 28288, 23520) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=10244, ip=127.0.0.1, actor_id=a06576591fdf62df2716afd901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x0000025DF9AFAA90>)
+  File "python\ray\_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1498, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\_private\function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\marco\AppData\Local\Programs\Python\Python311\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 16 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1132, in _try_get_data\n    data = self._data_queue.get(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\multiprocessing\\queues.py", line 114, in get\n    raise Empty\n_queue.Empty\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n                  ^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\simulation\\ray_transport\\ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n           ^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n           ^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flwr\\client\\numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\client.py", line 68, in fit\n    train(self.model, self.trainloader, optim, epochs, self.device)\n  File "C:\\Users\\marco\\Documents\\Workplace\\FL\\Flower_Pytorch\\Parte_1\\model.py", line 39, in train\n    for images, labels in trainloader:\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 630, in __next__\n    data = self._next_data()\n           ^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1328, in _next_data\n    idx, data = self._get_data()\n                ^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1294, in _get_data\n    success, data = self._try_get_data()\n                    ^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\marco\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\torch\\utils\\data\\dataloader.py", line 1145, in _try_get_data\n    raise RuntimeError(f\'DataLoader worker (pid(s) {pids_str}) exited unexpectedly\') from e\nRuntimeError: DataLoader worker (pid(s) 28288, 23520) exited unexpectedly\n',)
+[2024-11-21 15:55:19,722][flwr][DEBUG] - fit_round 1 received 5 results and 5 failures
+[2024-11-21 15:55:19,738][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2024-11-21 15:55:22,011][flwr][INFO] - fit progress: (1, 179.80616188049316, {'accuracy': 0.1591}, 47.8922211000463)
+[2024-11-21 15:55:22,011][flwr][INFO] - evaluate_round 1: no clients selected, cancel
+[2024-11-21 15:55:22,011][flwr][DEBUG] - fit_round 2: strategy sampled 10 clients (out of 100)
+[2024-11-21 15:56:13,890][flwr][DEBUG] - fit_round 2 received 10 results and 0 failures
+[2024-11-21 15:56:16,224][flwr][INFO] - fit progress: (2, 169.57848930358887, {'accuracy': 0.5813}, 102.09507430007216)
+[2024-11-21 15:56:16,224][flwr][INFO] - evaluate_round 2: no clients selected, cancel
+[2024-11-21 15:56:16,224][flwr][DEBUG] - fit_round 3: strategy sampled 10 clients (out of 100)
+[2024-11-21 15:57:05,308][flwr][DEBUG] - fit_round 3 received 10 results and 0 failures
+[2024-11-21 15:57:08,050][flwr][INFO] - fit progress: (3, 65.17099905014038, {'accuracy': 0.7444}, 153.9263219999848)
+[2024-11-21 15:57:08,050][flwr][INFO] - evaluate_round 3: no clients selected, cancel
+[2024-11-21 15:57:08,050][flwr][DEBUG] - fit_round 4: strategy sampled 10 clients (out of 100)
+[2024-11-21 15:58:01,682][flwr][DEBUG] - fit_round 4 received 10 results and 0 failures
+[2024-11-21 15:58:04,146][flwr][INFO] - fit progress: (4, 45.47448801994324, {'accuracy': 0.8276}, 210.0173303000629)
+[2024-11-21 15:58:04,146][flwr][INFO] - evaluate_round 4: no clients selected, cancel
+[2024-11-21 15:58:04,146][flwr][DEBUG] - fit_round 5: strategy sampled 10 clients (out of 100)
+[2024-11-21 15:58:52,565][flwr][DEBUG] - fit_round 5 received 10 results and 0 failures
+[2024-11-21 15:58:56,357][flwr][INFO] - fit progress: (5, 34.43975266814232, {'accuracy': 0.8729}, 262.2287571000634)
+[2024-11-21 15:58:56,359][flwr][INFO] - evaluate_round 5: no clients selected, cancel
+[2024-11-21 15:58:56,359][flwr][DEBUG] - fit_round 6: strategy sampled 10 clients (out of 100)
+[2024-11-21 15:59:50,078][flwr][DEBUG] - fit_round 6 received 10 results and 0 failures
+[2024-11-21 15:59:53,814][flwr][INFO] - fit progress: (6, 25.624795876443386, {'accuracy': 0.9071}, 319.68674420006573)
+[2024-11-21 15:59:53,814][flwr][INFO] - evaluate_round 6: no clients selected, cancel
+[2024-11-21 15:59:53,814][flwr][DEBUG] - fit_round 7: strategy sampled 10 clients (out of 100)
+[2024-11-21 16:00:40,761][flwr][DEBUG] - fit_round 7 received 10 results and 0 failures
+[2024-11-21 16:00:44,487][flwr][INFO] - fit progress: (7, 19.843621462583542, {'accuracy': 0.9264}, 370.3584888000041)
+[2024-11-21 16:00:44,488][flwr][INFO] - evaluate_round 7: no clients selected, cancel
+[2024-11-21 16:00:44,489][flwr][DEBUG] - fit_round 8: strategy sampled 10 clients (out of 100)
+[2024-11-21 16:01:40,276][flwr][DEBUG] - fit_round 8 received 10 results and 0 failures
+[2024-11-21 16:01:44,151][flwr][INFO] - fit progress: (8, 15.722504446282983, {'accuracy': 0.9424}, 430.0223820999963)
+[2024-11-21 16:01:44,151][flwr][INFO] - evaluate_round 8: no clients selected, cancel
+[2024-11-21 16:01:44,151][flwr][DEBUG] - fit_round 9: strategy sampled 10 clients (out of 100)
+[2024-11-21 16:02:34,591][flwr][DEBUG] - fit_round 9 received 10 results and 0 failures
+[2024-11-21 16:02:38,807][flwr][INFO] - fit progress: (9, 14.323280340991914, {'accuracy': 0.9454}, 484.67856920009945)
+[2024-11-21 16:02:38,808][flwr][INFO] - evaluate_round 9: no clients selected, cancel
+[2024-11-21 16:02:38,809][flwr][DEBUG] - fit_round 10: strategy sampled 10 clients (out of 100)
+[2024-11-21 16:03:29,600][flwr][DEBUG] - fit_round 10 received 10 results and 0 failures
+[2024-11-21 16:03:33,253][flwr][INFO] - fit progress: (10, 13.00406144792214, {'accuracy': 0.9527}, 539.1279742000625)
+[2024-11-21 16:03:33,253][flwr][INFO] - evaluate_round 10: no clients selected, cancel
+[2024-11-21 16:03:33,253][flwr][INFO] - FL finished in 539.1289190000389
+[2024-11-21 16:03:33,253][flwr][INFO] - app_fit: losses_distributed []
+[2024-11-21 16:03:33,253][flwr][INFO] - app_fit: metrics_distributed_fit {}
+[2024-11-21 16:03:33,253][flwr][INFO] - app_fit: metrics_distributed {}
+[2024-11-21 16:03:33,253][flwr][INFO] - app_fit: losses_centralized [(0, 182.17216324806213), (1, 179.80616188049316), (2, 169.57848930358887), (3, 65.17099905014038), (4, 45.47448801994324), (5, 34.43975266814232), (6, 25.624795876443386), (7, 19.843621462583542), (8, 15.722504446282983), (9, 14.323280340991914), (10, 13.00406144792214)]
+[2024-11-21 16:03:33,253][flwr][INFO] - app_fit: metrics_centralized {'accuracy': [(0, 0.071), (1, 0.1591), (2, 0.5813), (3, 0.7444), (4, 0.8276), (5, 0.8729), (6, 0.9071), (7, 0.9264), (8, 0.9424), (9, 0.9454), (10, 0.9527)]}
