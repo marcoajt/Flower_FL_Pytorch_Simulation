@@ -1,0 +1,19 @@
+---
+# Este é um arquivo de configuração mínimo no formato YAML
+# Ele será processado pelo Hydra em tempo de execução.
+# Você pode notar que ele não tem nada de especial que outros arquivos YAML não tenham.
+# Consulte tutoriais mais avançados para aprender a usar o Hydra em conjunto com o Flower
+# para configurações mais avançadas.
+
+num_rounds: 10  # Número de rodadas de aprendizado federado (FL) no experimento
+num_clients: 100  # Número total de clientes disponíveis (também o número de partições a serem criadas)
+batch_size: 20  # Tamanho do lote (batch) usado pelos clientes durante o treinamento
+num_classes: 10  # Número de classes no nosso conjunto de dados (usamos MNIST) -- define a camada totalmente conectada do modelo
+num_clients_per_round_fit: 10  # Número de clientes envolvidos em cada rodada de treinamento (fit)
+                               # (fit = clientes recebem o modelo do servidor e realizam o treinamento local)
+num_clients_per_round_eval: 25  # Número de clientes envolvidos em cada rodada de avaliação
+                                # (evaluate = clientes avaliam o modelo enviado pelo servidor em seus conjuntos de dados locais, sem treinamento)
+config_fit:  # Configuração que cada cliente receberá (enviada pelo servidor) quando for selecionado
+  lr: 0.01  # Taxa de aprendizado a ser usada pelos clientes
+  momentum: 0.9  # Momentum usado pelo otimizador SGD no lado do cliente
+  local_epochs: 1  # Número de épocas de treinamento local que cada cliente realiza em uma rodada de fit()
