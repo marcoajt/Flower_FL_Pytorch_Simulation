@@ -1,0 +1,66 @@
+# Bytecode do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Arquivos de log
+*.log
+*.out
+*.err
+
+# Pastas de ambiente virtual
+env/
+venv/
+ENV/
+.VENV/
+
+# Configurações de IDEs
+.vscode/
+.idea/
+*.swp
+
+# Arquivos temporários e backups
+*.tmp
+*.bak
+*.old
+*.orig
+*.save
+*.~*
+
+# Arquivos de teste de unidade
+.pytest_cache/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.coverage
+*.cache
+*.egg
+*.eggs
+
+# Diretórios de construção
+build/
+dist/
+*.egg-info/
+
+# Arquivos de pacotes
+*.wheel
+*.whl
+
+# Configuração de notebooks Jupyter
+.ipynb_checkpoints/
+
+# Dados temporários ou sensíveis
+*.csv
+*.sqlite3
+*.db
+*.env
+.DS_Store
+
+# Arquivos e pastas gerados automaticamente
+outputs/
+data/
+
+# Outros
+*.pyo
+*.prof
